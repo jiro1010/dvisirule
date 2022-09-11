@@ -108,3 +108,23 @@ $ mv a-si.dvi a.dvi
 ```
 
 For more details, refer to `dvisirule.pdf` and other source files.
+
+
+## Supported TeX Distribution
+
+Basically I am a Linux / TeXLive user, and `dvisirule` is developed
+and tested on TeXLive 2019 (Don't blame me for my laziness. I know the
+version is old), and on Debian.
+So I guess `dvisirule` will work well on Linux / TeXLive.
+
+I have tried Linux / MiKTeX 22.8.28 too and `dvisirule` succeded with
+a simple installation test.
+I used `make -s DVISELECT=/brabra/dviselect DVICONCAT=/.../dviconcat`.
+But I am not sure MS-Windows users would success, particularly some
+executables including some scripts and a binary.
+Someone said that Perl script is the best solution to run on both of
+linux and windows. But I am not a Perl user (Ok, you can blame me for
+my laziness).
+
+If anyone contributes some scripts which are Windows-capable, I would
+gladly review and merge into this pkg.
