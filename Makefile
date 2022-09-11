@@ -77,7 +77,7 @@ ${FigPdf}: ${Dir}/%.pdf: ${CURDIR}/%.tex ${Runtime}
 	${Dir}/${Name} ${bname}.dvi ${bname}-si.dvi && \
 	${DVIPDFMX} ${bname}-si.dvi && \
 	${PDFCROP} ${bname}-si.pdf $@
-	ebb $@
+	ebb -O $@ > ${Dir}/${bname}.bb
 
 ${FigTex}: demo.tex
 	sed -n -e '/definecolor/,/hskip0pt/p' $< |\
