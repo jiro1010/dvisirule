@@ -20,7 +20,7 @@
 # Those filenames have the absolute page-numbers.
 
 %.sidvi: %.dvi
-	"${DVITYPE}" -show-opcodes $< |\
+	"${DVITYPE}" $< |\
 	awk -f "${Marker}" |\
 	"${SIRULE}" $< $@
 

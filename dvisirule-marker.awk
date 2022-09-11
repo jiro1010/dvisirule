@@ -64,9 +64,8 @@ in_superimpose && /sirule EOL/ {
 	in_superimpose--;
 }
 in_superimpose && /(put|set)rule/ {
-	# {239} means "special xxx1" instruction
 	if (color[cur - 1] == "")
-		color[cur - 1] = "0:{239}color push " FGdef;
+		color[cur - 1] = "0:color push " FGdef;
 	# there are several variants of the color model, but we don't care.
 	# handle any color model as a single string.
 	gsub(/ /, "_", color[cur - 1]);

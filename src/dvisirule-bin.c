@@ -366,7 +366,7 @@ static void postamble(unsigned int last, unsigned int ofbop, unsigned int srcsz)
 int main(int argc, char *argv[])
 {
 	int e, n, h, v;
-	unsigned int height, width, hpx, wpx, rule_op, last;
+	unsigned int height, width, hpx, wpx, last;
 	/* offsets */
 	unsigned int ofbop, ofcolor, ofrule, ofeop, ofline;
 	float gray;
@@ -399,30 +399,31 @@ int main(int argc, char *argv[])
 		if (*cmdp == 'h') {
 			/*
 			 * depends on the TeX version or variant?
-			 * h=-31 v=176 <offset>:{239}color_push_gray_0
-			 * <offset>: putrule {137} height 26214, width 2290850
+			 * h=-31 v=176 <offset>:color_push_gray_0
+			 * <offset>: putrule height 26214, width 2290850
 			 * (2x146 pixels)
 			 */
 			n = sscanf(cmdp, "h=%d v=%d "
-				   "%u:{239}color_push_%s "
-				   "%u: %s {%u} height %u, width %u "
+				   "%u:color_push_%s "
+				   "%u: %s height %u, width %u "
 				   "(%ux%u pixels)",
 				   &h, &v,
 				   &ofcolor, colorpush,
-				   &ofrule, op, &rule_op,
+				   &ofrule, op,
 				   &height, &width,
 				   &hpx, &wpx);
-			if (n != 11)
+			if (n != 10) {
 				n = sscanf(cmdp, "h=%d v=%d "
-					   "%u:{239}pdf:bcolor [%f] "
-					   "%u: %s {%u} height %u, width %u "
+					   "%u:pdf:bcolor [%f] "
+					   "%u: %s height %u, width %u "
 					   "(%ux%u pixels)",
 					   &h, &v,
 					   &ofcolor, &gray,
-					   &ofrule, op, &rule_op,
+					   &ofrule, op,
 					   &height, &width,
 					   &hpx, &wpx);
-			Errx(n != 11, "n %d, %s", n, cmdp);
+				Errx(n != 10, "n %d, %s", n, cmdp);
+			}
 
 			path = malloc(sizeof(*path));
 			Err(!path, "malloc");
@@ -442,15 +443,15 @@ int main(int argc, char *argv[])
 			Errx(n != 2, "n %d, %s", n, cmdp);
 		} else if (!strncmp(cmdp, "bol", 3)
 			   || !strncmp(cmdp, "eol", 3)) {
-			/* bol <offset>: xxx ' {239}sirule BOL' */
-			/* eol <offset>: xxx ' {239}sirule EOL' */
+			/* bol <offset>: xxx ' sirule BOL' */
+			/* eol <offset>: xxx ' sirule EOL' */
 			n = sscanf(cmdp, "%col %u: %s",
 				   &c, &ofline, op);
 			Errx(n != 3, "n %d, %s", n, cmdp);
 			memset(src.p + ofline, NOP, src.p[ofline + 1] + 2);
 		} else {
-			/* <offset>: eop {140}  h=0 v=2206 */
-			n = sscanf(cmdp, "%u: eop {140}  h=%d v=%d",
+			/* <offset>: eop  h=0 v=2206 */
+			n = sscanf(cmdp, "%u: eop  h=%d v=%d",
 				   &ofeop, &page.h, &page.v);
 			Errx(n != 3, "n %d, %s", n, cmdp);
 
