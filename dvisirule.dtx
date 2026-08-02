@@ -473,7 +473,7 @@
 % \smallskip
 %
 %    \begin{macrocode}
-\@ifclassloaded{longtable}{}{%
+\@ifpackageloaded{longtable}{%
   \global\let\si@OLT@hline=\LT@hline%
   \newcommand{\si@LT@hline}{%
     \noalign{\si@bol}%
@@ -492,6 +492,6 @@
   }{%
     \end{si@Olongtable}%
   }%
-}
+}{}
 %    \end{macrocode}
 %\Finale
