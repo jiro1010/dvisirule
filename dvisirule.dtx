@@ -453,6 +453,7 @@
 %
 %    \begin{macrocode}
 \@ifundefined{newcolumntype}{%
+  %\PackageWarning{dvisirule}{newcolumntype is not defined}%
   \global\let\newcolumntype=\@gobbletwo%
 }{}
 \let\si@Otabular=\tabular
